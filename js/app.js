@@ -14,7 +14,6 @@ let coursesList = document.querySelector("#courses-list");
 
 
 //créer un objet tr et mettre les td dans le innerHTML
-
 coursesList.addEventListener('click', (e) => {
   if (e.target.className == 'add-to-cart') {
     let parent = e.target.parentElement;
@@ -28,24 +27,28 @@ coursesList.addEventListener('click', (e) => {
      refTable.tBodies[0].appendChild(tr).innerHTML += td;
     
      let objJson = {
-        titre :parent.getElementsByTagName("h4")[0].textContent ,
-        prix : parent.querySelector(".discount").textContent ,
-        quantité : 1
+      titre :parent.getElementsByTagName("h4")[0].textContent ,
+      prix : parent.querySelector(".discount").textContent ,
+      quantité : 1
     }
+
     let objLinea = JSON.stringify(objJson);
-    localStorage.setItem("obj",objLinea);
-  
+  localStorage.setItem("obj",objLinea);
+    
+    // let objMinea = localStorage.getItem("obj");
+    // objJson = JSON.parse(obMLinea);
 
   }
-  let objLinea = localStorage.getItem("obj");
-let objJson = JSON.parse(objLinea);
-alert(objJson.titre)
+
+  
+  
+  
+
  
 })
-let objLinea = JSON.stringify(objJson);
-localStorage.setItem("obj",objLinea);
-let objLinea = localStorage.getItem("obj");
-let objJson = JSON.parse(objLinea);
-alert(objJson.titre)
+
+
+
+ 
 
 
