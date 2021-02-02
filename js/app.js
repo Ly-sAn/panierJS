@@ -25,6 +25,27 @@ coursesList.addEventListener('click', (e) => {
     let tr = document.createElement('TR');
     let button = "<button class='button'>Supprimer</button>";
     let td = `<td></td><td>${title}</td><td>${price}</td><td>${quantity}</td><td>${button}</td>`;
-    refTable.tBodies[0].appendChild(tr).innerHTML += td;
+     refTable.tBodies[0].appendChild(tr).innerHTML += td;
+    
+     let objJson = {
+        titre :parent.getElementsByTagName("h4")[0].textContent ,
+        prix : parent.querySelector(".discount").textContent ,
+        quantité : 1
+    }
+    let objLinea = JSON.stringify(objJson);
+    localStorage.setItem("obj",objLinea);
+  
+
   }
+  let objLinea = localStorage.getItem("obj");
+let objJson = JSON.parse(objLinea);
+alert(objJson.titre)
+ 
 })
+let objLinea = JSON.stringify(objJson);
+localStorage.setItem("obj",objLinea);
+let objLinea = localStorage.getItem("obj");
+let objJson = JSON.parse(objLinea);
+alert(objJson.titre)
+
+
