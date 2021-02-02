@@ -13,29 +13,29 @@ h1 {
 
 .hidden {display: none !important;}
 
-/*
-* Header
-*/
-header {
-  padding: 20px 0 0 0;
-  background: white;
-  text-align: center;
-  display: flex;
-  justify-content: space-between;
-}
-header .logo img {
-  width: 100%;
-}
-header .submenu {
-  position: relative;
-  list-style-type: none;
-  width: 50%;
-}
-header .submenu #img-cart {
-  width: 25px;
-  margin-top: 15px;
-  cursor: pointer;
-}
+  /*
+  * Header
+  */
+  header {
+    padding: 20px 0 0 0;
+    background: white;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+  }
+  header .logo img {
+    width: 100%;
+  }
+  header .submenu {
+    position: relative;
+    list-style-type: none;
+    width: 50%;
+  }
+  header .submenu #img-cart {
+    width: 25px;
+    margin-top: 15px;
+    cursor: pointer;
+  }
 
 /** cart **/
 #cart {box-shadow: 0px 1px 5px 0px #adadad;}
