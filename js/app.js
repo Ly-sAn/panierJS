@@ -1,8 +1,11 @@
 
 // Récupère le container des produits
 let coursesList = document.querySelector("#courses-list");
+let header = document.querySelector("#header");
 
 addToCart();
+removeCartItem();
+clearCart();
 
 // Se place dans le container
 coursesList.addEventListener('click', (e) => {
@@ -16,12 +19,28 @@ coursesList.addEventListener('click', (e) => {
 
     addToCart();
 
-    removeCartItem();
-
-    clearCart();
-
   }
 })
+
+function removeCartItem(){
+  header.addEventListener('click', (e) =>{
+        if (e.target.className == 'cart-item'){
+        e.target.parentNode.parentNode.remove();
+
+        let index = e.target.parentNode.parentNode.querySelector(".index").innerHTML;
+  
+        console.log(index);
+  
+        let lsList = JSON.parse(localStorage.getItem("panier"));
+      
+        lsList = lsList.filter(item => item !== lsList[index]);
+        
+        localStorage.setItem('panier', JSON.stringify(lsList));
+
+    }
+})
+}
+
 
 function addToCart(){
   
@@ -30,30 +49,24 @@ function addToCart(){
 
 
   let button = "<button class='cart-item'>Supprimer</button>";
-  let td;
+  let td = "";
 
   for(o in lsList){
-    td +=`<tr><td></td><td>i</td><td>i</td><td>1</td><td>${button}</td></tr>`;
+    td += `<tr class="table-row"><td class="index">${o}</td><td>${lsList[o].title}</td><td>${lsList[o].price}</td><td>1</td><td>${button}</td></tr>`;
   }
-
+ 
   let refTable = document.getElementById("cart-table");
   let tr = document.createElement('TR');
-  refTable.tBodies[0].innerHTML += td;
+  refTable.tBodies[0].innerHTML = td;
 
 }
 
-function removeCartItem(){
-  addEventListener('click', (e) =>{
-    if (e.target.className == 'cart-item'){
-      e.target.parentNode.parentNode.remove();
-    }
-  })
-}
 
 function clearCart(){
-  addEventListener('click', (e) =>{
+  header.addEventListener('click', (e) =>{
     if (e.target.className == 'button u-full-width'){
       localStorage.clear();
+      e.target.parentNode.querySelector(".tbody").innerHTML = "";
     }
   })
 }
@@ -69,5 +82,4 @@ function addToLS(data){
   }
   a.push(data);
   localStorage.setItem('panier', JSON.stringify(a));
-
 }
