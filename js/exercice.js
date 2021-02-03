@@ -37,3 +37,18 @@ Créez un objet qui contient 2 attributs.
 })()
 
 
+let saveData = (x) => {
+    if (localStorage.getItem(x)) {
+        localStorage.setItem(x)
+    }
+}
+
+let saveDataSecond = (key, variable) => {
+    if (typeof (Storage) !== 'undefined') {
+        // Storing value
+        localStorage.setItem(key, variable);
+
+        // retrive value from local data storage
+        let myVar = localStorage.getItem(key)
+    }
+}
