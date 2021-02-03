@@ -28,9 +28,7 @@ function removeCartItem(){
         e.target.parentNode.parentNode.remove();
 
         let index = e.target.parentNode.parentNode.querySelector(".index").innerHTML;
-  
-        console.log(index);
-  
+    
         let lsList = JSON.parse(localStorage.getItem("panier"));
       
         lsList = lsList.filter(item => item !== lsList[index]);
@@ -51,12 +49,13 @@ function addToCart(){
   let button = "<button class='cart-item'>Supprimer</button>";
   let td = "";
 
+
   for(o in lsList){
-    td += `<tr class="table-row"><td class="index">${o}</td><td>${lsList[o].title}</td><td>${lsList[o].price}</td><td>1</td><td>${button}</td></tr>`;
+    td += `<tr class="table-row"><td class="index" style="display: none">${o}</td>
+    <td></td><td>${lsList[o].title}</td><td>${lsList[o].price}</td><td>1</td><td>${button}</td></tr>`;
   }
  
   let refTable = document.getElementById("cart-table");
-  let tr = document.createElement('TR');
   refTable.tBodies[0].innerHTML = td;
 
 }
@@ -72,6 +71,8 @@ function clearCart(){
 }
 
 function addToLS(data){
+
+
   let a = [];
   a = localStorage.getItem('panier');
 
@@ -80,6 +81,13 @@ function addToLS(data){
   }  else {
     a = [];
   }
+
+  if(data.stock > 0){
+    data.stock--;
+  } else {
+    data.stock = 0;
+  }
+
   a.push(data);
   localStorage.setItem('panier', JSON.stringify(a));
 }
