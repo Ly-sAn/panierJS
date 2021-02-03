@@ -14,12 +14,12 @@ coursesList.addEventListener('click', (e) => {
 
         //Récupère le chiffre de data-id de l'élément
         let dataId = e.target.getAttribute("data-id");
+        let courseName = COURSES[dataId].title
 
         addToLS(COURSES[dataId]);
-
         addToCart();
 
-        notification('Vous avez ajouter un article dans le panier', '#198754', '#FFF')
+        notification("Vous avez ajouter un " + courseName + " dans le panier", '#198754', '#FFF')
 
     }
 })

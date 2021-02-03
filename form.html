@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <title>Paiement</title>
+</head>
+<body>
+
+<!-- 9 input -->
+<form action="#" method="post" id="purchase">
+
+    <h1>Détail de l'expédition</h1>
+    <div class="form-control">
+        <label for="nom">Nom</label>
+        <input type="text" name="nom" id="nom">
+    </div>
+    <div class="form-control">
+        <label for="prenom">Prenom</label>
+        <input type="text" name="nom" id="prenom">
+    </div>
+    <div class="form-control">
+        <label for="mail">Email</label>
+        <input type="email" name="nom" id="mail">
+        <small></small>
+    </div>
+    <div class="form-control">
+        <label for="address">Adresse</label>
+        <input type="text" name="nom" id="address">
+    </div>
+    <div class="form-control">
+        <label for="tel">Téléphone</label>
+        <input type="text" name="nom" id="tel">
+        <small></small>
+    </div>
+
+    <h1>Information de paiement</h1>
+    <div class="paiement-info">
+        <div class="form-control-paiement-info-card">
+            <label for="card">Carte de paiement</label>
+            <input type="text" name="card" id="card">
+        </div>
+        <div class="union">
+            <div class="form-control-paiement-info">
+                <label for="date-card">Exp</label>
+                <input type="text" name="date-card" id="date-card">
+            </div>
+            <div class="form-control-paiement-info">
+                <label for="ccv">CCV</label>
+                <input type="text" name="ccv" id="ccv">
+            </div>
+        </div>
+    </div>
+
+    <button type="submit">Valider Achat</button>
+
+</form>
+
+<script src="js/sript.js"></script>
+</body>
+</html>

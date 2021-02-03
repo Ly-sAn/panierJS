@@ -28,7 +28,7 @@ let buildItems = (data) => {
             <p>
               Disponible: <span class="stock">${data[courses[i]].stock}</span>
             </p>
-            <a href="#" class="add-to-cart" data-id="1"><i class="fa fa-cart-plus"></i>Ajouter au panier</a>
+            <a href="#" class="add-to-cart" data-id=${data[courses[i]].id}><i class="fa fa-cart-plus"></i>Ajouter au panier</a>
           </div>
         </div>
         `
