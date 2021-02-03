@@ -1,42 +1,62 @@
 
+// Récupère le container des produits
 let coursesList = document.querySelector("#courses-list");
 
+addToCart();
 
-//créer un objet tr et mettre les td dans le innerHTML
-
+// Se place dans le container
 coursesList.addEventListener('click', (e) => {
-
-
+  //Se place dans la carte du produit
   if (e.target.className == 'add-to-cart') {
     
     //Récupère le chiffre de data-id de l'élément
     let dataId = e.target.getAttribute("data-id");
-    //Parent de l'élément ciblé
-    let parent = e.target.parentElement;
-
-
-    let refTable = document.getElementById("cart-table");
-    let tr = document.createElement('TR');
-    let button = "<button class='button'>Supprimer</button>";
-    let td = `<td></td><td>${obj.title}</td><td>${obj.price}</td><td>${obj.quantity}</td><td>${button}</td>`;
-    refTable.tBodies[0].appendChild(tr).innerHTML += td;
 
     addToLS(COURSES[dataId]);
 
-    addEventListener('click', (e) =>{
-      if (e.target.className == 'button'){
-        e.target.parentNode.parentNode.remove();
-      }
-    })
+    addToCart();
 
-    // addEventListener('click', (e) =>{
-    //   if (e.target.className == "button u-full-width"){
-    //     e.target.parentNode.remove();
-    //   }
-    // })
+    removeCartItem();
+
+    clearCart();
 
   }
 })
+
+function addToCart(){
+  
+  let lsList = JSON.parse(localStorage.getItem("panier"));
+  console.log(lsList);
+
+
+  let button = "<button class='cart-item'>Supprimer</button>";
+  let td;
+
+  for(o in lsList){
+    td +=`<tr><td></td><td>i</td><td>i</td><td>1</td><td>${button}</td></tr>`;
+  }
+
+  let refTable = document.getElementById("cart-table");
+  let tr = document.createElement('TR');
+  refTable.tBodies[0].innerHTML += td;
+
+}
+
+function removeCartItem(){
+  addEventListener('click', (e) =>{
+    if (e.target.className == 'cart-item'){
+      e.target.parentNode.parentNode.remove();
+    }
+  })
+}
+
+function clearCart(){
+  addEventListener('click', (e) =>{
+    if (e.target.className == 'button u-full-width'){
+      localStorage.clear();
+    }
+  })
+}
 
 function addToLS(data){
   let a = [];
