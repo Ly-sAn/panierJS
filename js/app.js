@@ -2,11 +2,11 @@
 // Récupère le container des produits
 let coursesList = document.querySelector("#courses-list");
 let header = document.querySelector("#header");
+let coursesTable = [];
 
 addToCart();
 removeCartItem();
 clearCart();
-//getStock();
 
 
 // Se place dans le container
@@ -20,8 +20,6 @@ coursesList.addEventListener('click', (e) => {
     addToLS(COURSES[dataId]);
 
     addToCart();
-
-    // getStock();
 
   }
 })
@@ -95,7 +93,6 @@ function clearCart(){
     if (e.target.className == 'button u-full-width'){
       localStorage.clear();
       e.target.parentNode.querySelector(".tbody").innerHTML = "";
-      // getStock();
     }
   })
 }
@@ -111,17 +108,35 @@ function addToLS(data){
     a = [];
   }
 
+
+  if (data.stock > 1){
+    data.stock--;
+  }
+  else{
+    alert('Article Indisponible');
+    return;
+  }
+    
   a.push(data);
   localStorage.setItem('panier', JSON.stringify(a));
+
 }
 
 function removeFromLS(data){
 
   let lsList = JSON.parse(localStorage.getItem("panier"));
-      
+  
+  let lastObjectId = lsList[data].id;
+
   //Enlever l'objet en question de l'array
   lsList = lsList.filter(item => item !== lsList[data]);
-  
+
+  for (o in lsList){
+    if (lsList[o].id = lastObjectId){
+      lsList[o].stock++;
+    }
+  }
+
   localStorage.setItem('panier', JSON.stringify(lsList));
 
 }
