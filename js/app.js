@@ -2,13 +2,12 @@
 let coursesList = document.querySelector("#courses-list");
 let header = document.querySelector("#header");
 let coursesTable = [];
-let cart = document.getElementById("in-cart-items-num");
-let Subtotal = document.getElementById("Subtotal");
 let stock = document.getElementsByClassName("stock");
 let redirection = document.getElementById('confirm-command');
 let alert_notification = document.querySelector('.notification-container')
 stock.innerHTML = 50 ;
 
+//getStock();
 refreshCart();
 addToCart();
 removeCartItem();
@@ -21,6 +20,15 @@ function refreshCart(){
 
     let button = "<button class='cart-item'>Supprimer</button>";
     let td = "";
+
+    
+    
+    let cartQuantity = document.getElementById("in-cart-items-num");
+    let Subtotal = document.getElementById("Subtotal");
+
+    let cartTotal = 9.99
+    cartQuantity.innerHTML = lsList.length;
+    Subtotal.innerHTML = cartTotal;
 
     //Boucle dans les objets du local storage et les stock dans une ligne à chaque tour de boucle
     for(o in lsList){
@@ -74,6 +82,7 @@ function removeCartItem(){
             // Subtotal.innerHTML -= parseInt(9.99);
 
             removeFromLS(title);
+            refreshCart();
 
         }
     })
@@ -201,6 +210,7 @@ function notification (message, backgroundColor, color) {
 //     }
 
 //     let AllStocks = document.querySelectorAll(".stock");
+//     console.log(AllStocks);
 
 //     let ux_ui = lsList.filter(function(item) {
 //         return item.id == 1;
@@ -218,10 +228,9 @@ function notification (message, backgroundColor, color) {
 //         return item.id == 5;
 //     });
 
-//     AllStocks[0].innerHTML = ux_ui[ux_ui.length-1].stock;
-//     AllStocks[1].innerHTML = php_8[php_8.length-1].stock;
-//     AllStocks[2].innerHTML = react_js[react_js.length-1].stock;
-//     AllStocks[3].innerHTML = node_js[node_js.length-1].stock;
-//     AllStocks[4].innerHTML = my_sql[my_sql.length-1].stock;
-
+//     AllStocks[0].innerHTML = ux_ui.length;
+//     AllStocks[1].innerHTML = php_8.length;
+//     AllStocks[2].innerHTML = react_js.length;
+//     AllStocks[3].innerHTML = node_js.length;
+//     AllStocks[4].innerHTML = my_sql.length;
 // }

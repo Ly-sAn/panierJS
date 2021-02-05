@@ -8,6 +8,8 @@ let buildItems = (data) => {
     let courses = Object.keys(data)
 
     container_items.innerHTML = ''
+    
+    let lsList = JSON.parse(localStorage.getItem("panier"));
 
     for (let i = 0; i < courses.length; i++) {
 
