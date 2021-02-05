@@ -10,82 +10,9 @@ let alert_notification = document.querySelector('.notification-container')
 stock.innerHTML = 50 ;
 
 refreshCart();
+addToCart();
 removeCartItem();
 clearCart();
-
-
-// Se place dans le container
-coursesList.addEventListener('click', (e) => {
-    //Se place dans la carte dcu produit
-    if (e.target.className == 'add-to-cart') {
-
-        //Récupère le chiffre de data-id de l'élément
-        let dataId = e.target.getAttribute("data-id");
-
-        //Récupère un objet de COURSES à son id
-        let courseName = COURSES[dataId].title;
-
-        //Ajoute cet objet au localstorage
-        addToLS(COURSES[dataId]);
-
-        refreshCart();
-
-        notification("Vous avez ajouté un " + courseName + " dans le panier", '#198754', '#FFF')
-
-    }
-})
-
-//Supprime une ligne du panier
-function removeCartItem(){
-    header.addEventListener('click', (e) =>{
-        if (e.target.className == 'cart-item'){
-            e.target.parentNode.parentNode.remove();
-            refreshCart();
-
-            //Récupère l'index de la ligne du panier pour le passer dans l'objet
-            let index = e.target.parentNode.parentNode.querySelector(".index").innerHTML;
-            // cart.innerHTML --;
-            // Subtotal.innerHTML -= parseInt(9.99);
-
-            removeFromLS(index);
-
-        }
-    })
-}
-
-//récupère le stock et l'affiche dans le HTML (ne fontionne pas tout le temps)
-// function getStock(){
-
-//     let lsList = JSON.parse(localStorage.getItem("panier"));
-//     if (lsList == null){
-//         return;
-//     }
-
-//     let AllStocks = document.querySelectorAll(".stock");
-
-//     let ux_ui = lsList.filter(function(item) {
-//         return item.id == 1;
-//     });
-//     let php_8 = lsList.filter(function(item) {
-//         return item.id == 2;
-//     });
-//     let react_js = lsList.filter(function(item) {
-//         return item.id == 3;
-//     });
-//     let node_js = lsList.filter(function(item) {
-//         return item.id == 4;
-//     });
-//     let my_sql = lsList.filter(function(item) {
-//         return item.id == 5;
-//     });
-
-//     AllStocks[0].innerHTML = ux_ui[ux_ui.length-1].stock;
-//     AllStocks[1].innerHTML = php_8[php_8.length-1].stock;
-//     AllStocks[2].innerHTML = react_js[react_js.length-1].stock;
-//     AllStocks[3].innerHTML = node_js[node_js.length-1].stock;
-//     AllStocks[4].innerHTML = my_sql[my_sql.length-1].stock;
-
-// }
 
 //Ajoute une ligne au panier, rafraichit le panier
 function refreshCart(){
@@ -97,8 +24,9 @@ function refreshCart(){
 
     //Boucle dans les objets du local storage et les stock dans une ligne à chaque tour de boucle
     for(o in lsList){
-        td += `<tr class="table-row"><td class="index" style="display: none">${o}</td>
-    <td></td><td>${lsList[o].title}</td><td>${lsList[o].price}</td><td>1</td><td>${button}</td></tr>`;
+        td += `<tr class="table-row">
+    <td></td><td class="title">${lsList[o].title}</td><td>${lsList[o].price}</td><td>1</td><td>${button}</td>
+               </tr>`;
     }
 
     let refTable = document.getElementById("cart-table");
@@ -107,18 +35,52 @@ function refreshCart(){
     refTable.tBodies[0].innerHTML = td;
 }
 
-//Supprime l'ensemnle du panier ainsi que le localStorage
-function clearCart(){
-    header.addEventListener('click', (e) =>{
-        if (e.target.className == 'button u-full-width'){
-            localStorage.clear();
-            e.target.parentNode.querySelector(".tbody").innerHTML = "";
-            notification('Vous avez vidé le panier', '#0dcaf0', '#000');
-            cart.innerHTML == 0;
-            Subtotal.innerHTML == parseFloat(0);
+// Se place dans le container
+function addToCart(){
+    coursesList.addEventListener('click', (e) => {
+        //Se place dans la carte dcu produit
+        if (e.target.className == 'add-to-cart') {
+    
+            //Récupère le chiffre de data-id de l'élément
+            let dataId = e.target.getAttribute("data-id");
+    
+            //Récupère un objet de COURSES à son id
+            let courseName = COURSES[dataId].title;
+    
+            //Ajoute cet objet au localstorage
+            addToLS(COURSES[dataId]);
+    
+            refreshCart();
+    
+            notification("Vous avez ajouté un " + courseName + " dans le panier", '#198754', '#FFF')
+    
         }
     })
 }
+
+
+//Supprime une ligne du panier
+function removeCartItem(){
+    header.addEventListener('click', (e) =>{
+        if (e.target.className == 'cart-item'){
+            e.target.parentNode.parentNode.remove();
+           // refreshCart();
+           
+
+            //Récupère l'index de la ligne du panier pour le passer dans l'objet
+            let title = e.target.parentNode.parentNode.querySelector(".title").innerHTML;
+
+            // cart.innerHTML --;
+            // Subtotal.innerHTML -= parseInt(9.99);
+
+            removeFromLS(title);
+
+        }
+    })
+}
+
+
+
 
 //Ajoute au localStorage
 function addToLS(data){
@@ -153,14 +115,22 @@ function addToLS(data){
 
 
 //Supprime du localStorage 
-function removeFromLS(data){
+function removeFromLS(title){
 
     let lsList = JSON.parse(localStorage.getItem("panier"));
 
-//    let lastObjectId = lsList[data].id;
+//    let lastObjectId = lsList[index].id;
 
+
+    for (o in lsList){
+        if (lsList[o].title = title){
+            lsList.splice(o, 1);
+            break;
+        }
+    }
     //Enlever l'objet en question de l'array
-    lsList = lsList.filter(item => item !== lsList[data]);
+    //lsList = lsList.filter(item => item !== lsList[index]);
+    // lsList = lsList.filter(function(item) { return item.title != title; });
 
     // for (o in lsList){
     //     if (lsList[o].id = lastObjectId){
@@ -172,6 +142,20 @@ function removeFromLS(data){
     notification('Vous avez supprimé un article', '#dc3545', '#FFF')
 
 }
+
+//Supprime l'ensemnle du panier ainsi que le localStorage
+function clearCart(){
+    header.addEventListener('click', (e) =>{
+        if (e.target.className == 'button u-full-width'){
+            localStorage.clear();
+            e.target.parentNode.querySelector(".tbody").innerHTML = "";
+            notification('Vous avez vidé le panier', '#0dcaf0', '#000');
+            cart.innerHTML == 0;
+            Subtotal.innerHTML == parseFloat(0);
+        }
+    })
+}
+
 
 // Redirection
 redirection.addEventListener('click', function () {
@@ -207,3 +191,37 @@ function notification (message, backgroundColor, color) {
         hide(alert_box)
     }, 3000)
 }
+
+//récupère le stock et l'affiche dans le HTML (ne fontionne pas tout le temps)
+// function getStock(){
+
+//     let lsList = JSON.parse(localStorage.getItem("panier"));
+//     if (lsList == null){
+//         return;
+//     }
+
+//     let AllStocks = document.querySelectorAll(".stock");
+
+//     let ux_ui = lsList.filter(function(item) {
+//         return item.id == 1;
+//     });
+//     let php_8 = lsList.filter(function(item) {
+//         return item.id == 2;
+//     });
+//     let react_js = lsList.filter(function(item) {
+//         return item.id == 3;
+//     });
+//     let node_js = lsList.filter(function(item) {
+//         return item.id == 4;
+//     });
+//     let my_sql = lsList.filter(function(item) {
+//         return item.id == 5;
+//     });
+
+//     AllStocks[0].innerHTML = ux_ui[ux_ui.length-1].stock;
+//     AllStocks[1].innerHTML = php_8[php_8.length-1].stock;
+//     AllStocks[2].innerHTML = react_js[react_js.length-1].stock;
+//     AllStocks[3].innerHTML = node_js[node_js.length-1].stock;
+//     AllStocks[4].innerHTML = my_sql[my_sql.length-1].stock;
+
+// }
