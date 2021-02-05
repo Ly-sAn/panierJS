@@ -26,7 +26,8 @@ function refreshCart(){
     let cartQuantity = document.getElementById("in-cart-items-num");
     let Subtotal = document.getElementById("Subtotal");
 
-    let cartTotal = 9.99
+    let cartTotal = 9.99 * lsList.length;
+
     cartQuantity.innerHTML = lsList.length;
     Subtotal.innerHTML = cartTotal;
 
