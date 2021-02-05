@@ -1,4 +1,4 @@
-// Récupère le container des produits
+// Initialisation des variables
 let coursesList = document.querySelector("#courses-list");
 let header = document.querySelector("#header");
 let coursesTable = [];
@@ -30,7 +30,7 @@ coursesList.addEventListener('click', (e) => {
 
         refreshCart();
 
-        notification("Vous avez ajouter un " + courseName + " dans le panier", '#198754', '#FFF')
+        notification("Vous avez ajouté un " + courseName + " dans le panier", '#198754', '#FFF')
 
     }
 })
@@ -169,7 +169,7 @@ function removeFromLS(data){
     // }
 
     localStorage.setItem('panier', JSON.stringify(lsList));
-    notification('Vous avez supprimer un article', '#dc3545', '#FFF')
+    notification('Vous avez supprimé un article', '#dc3545', '#FFF')
 
 }
 
