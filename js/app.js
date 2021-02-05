@@ -1,13 +1,13 @@
 
 // Récupère le container des produits
 let coursesList = document.querySelector("#courses-list");
+//Récupère le header
 let header = document.querySelector("#header");
-let coursesTable = [];
+
 
 addToCart();
 removeCartItem();
 clearCart();
-
 
 // Se place dans le container
 coursesList.addEventListener('click', (e) => {
@@ -41,9 +41,7 @@ function removeCartItem(){
 function getStock(){
 
   let lsList = JSON.parse(localStorage.getItem("panier"));
-  if (lsList == null){
-    return;
-  }
+  
 
   let AllStocks = document.querySelectorAll(".stock");
 
@@ -62,7 +60,7 @@ function getStock(){
   let my_sql = lsList.filter(function(item) {
     return item.id == 5;
   });
-
+  
   AllStocks[0].innerHTML = ux_ui[ux_ui.length-1].stock;
   AllStocks[1].innerHTML = php_8[php_8.length-1].stock;
   AllStocks[2].innerHTML = react_js[react_js.length-1].stock;
@@ -85,6 +83,8 @@ function addToCart(){
  
   let refTable = document.getElementById("cart-table");
   refTable.tBodies[0].innerHTML = td;
+
+
 }
 
 
@@ -99,26 +99,26 @@ function clearCart(){
 
 function addToLS(data){
 
-  let a = [];
-  a = localStorage.getItem('panier');
+  let lsList = [];
+  lsList = localStorage.getItem('panier');
 
-  if (a != null){
-    a = JSON.parse(a);
+  if (lsList != null){
+    lsList = JSON.parse(LsList);
   }  else {
-    a = [];
+    LsList = [];
   }
 
 
-  if (data.stock > 1){
-    data.stock--;
-  }
-  else{
-    alert('Article Indisponible');
-    return;
-  }
+  // if (data.stock > 1){
+  //   data.stock--;
+  // }
+  // else{
+  //   alert('Article Indisponible');
+  //   return;
+  // }
     
-  a.push(data);
-  localStorage.setItem('panier', JSON.stringify(a));
+  lsList.push(data);
+  localStorage.setItem('panier', JSON.stringify(lsList));
 
 }
 
@@ -126,16 +126,17 @@ function removeFromLS(data){
 
   let lsList = JSON.parse(localStorage.getItem("panier"));
   
-  let lastObjectId = lsList[data].id;
+  
+  //let lastObjectId = lsList[data].id;
 
   //Enlever l'objet en question de l'array
-  lsList = lsList.filter(item => item !== lsList[data]);
+  lsList = lsList.filter(item => item !== lsList[data]);é
 
-  for (o in lsList){
-    if (lsList[o].id = lastObjectId){
-      lsList[o].stock++;
-    }
-  }
+  //   let object = lsList.filter(function(item) {
+  //   return item.id == lastObjectId;
+  // });
+
+  // object[object.length -1].stock++;
 
   localStorage.setItem('panier', JSON.stringify(lsList));
 
