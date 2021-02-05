@@ -21,8 +21,11 @@ coursesList.addEventListener('click', (e) => {
 
         //Récupère le chiffre de data-id de l'élément
         let dataId = e.target.getAttribute("data-id");
+
+        //Récupère un objet de COURSES à son id
         let courseName = COURSES[dataId].title;
 
+        //Ajoute cet objet au localstorage
         addToLS(COURSES[dataId]);
 
         refreshCart();
@@ -32,12 +35,14 @@ coursesList.addEventListener('click', (e) => {
     }
 })
 
+//Supprime une ligne du panier
 function removeCartItem(){
     header.addEventListener('click', (e) =>{
         if (e.target.className == 'cart-item'){
             e.target.parentNode.parentNode.remove();
             refreshCart();
 
+            //Récupère l'index de la ligne du panier pour le passer dans l'objet
             let index = e.target.parentNode.parentNode.querySelector(".index").innerHTML;
             // cart.innerHTML --;
             // Subtotal.innerHTML -= parseInt(9.99);
@@ -48,7 +53,7 @@ function removeCartItem(){
     })
 }
 
-//récupère le stock et l'affiche dans le HTML
+//récupère le stock et l'affiche dans le HTML (ne fontionne pas tout le temps)
 // function getStock(){
 
 //     let lsList = JSON.parse(localStorage.getItem("panier"));
@@ -82,6 +87,7 @@ function removeCartItem(){
 
 // }
 
+//Ajoute une ligne au panier, rafraichit le panier
 function refreshCart(){
 
     let lsList = JSON.parse(localStorage.getItem("panier"));
@@ -89,16 +95,19 @@ function refreshCart(){
     let button = "<button class='cart-item'>Supprimer</button>";
     let td = "";
 
+    //Boucle dans les objets du local storage et les stock dans une ligne à chaque tour de boucle
     for(o in lsList){
         td += `<tr class="table-row"><td class="index" style="display: none">${o}</td>
     <td></td><td>${lsList[o].title}</td><td>${lsList[o].price}</td><td>1</td><td>${button}</td></tr>`;
     }
 
     let refTable = document.getElementById("cart-table");
+
+    //Insertion dans le corps de la table
     refTable.tBodies[0].innerHTML = td;
 }
 
-
+//Supprime l'ensemnle du panier ainsi que le localStorage
 function clearCart(){
     header.addEventListener('click', (e) =>{
         if (e.target.className == 'button u-full-width'){
@@ -111,8 +120,11 @@ function clearCart(){
     })
 }
 
+//Ajoute au localStorage
 function addToLS(data){
 
+
+    //Vérifie que le localstorage ne soit pas null, sinon renvoit un array vide
     let a = [];
     a = localStorage.getItem('panier');
 
@@ -133,11 +145,14 @@ function addToLS(data){
     //     return;
     // }
 
+    //ajoute l'objet au local storage
     a.push(data);
     localStorage.setItem('panier', JSON.stringify(a));
 
 }
 
+
+//Supprime du localStorage 
 function removeFromLS(data){
 
     let lsList = JSON.parse(localStorage.getItem("panier"));
