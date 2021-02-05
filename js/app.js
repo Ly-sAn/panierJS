@@ -9,7 +9,7 @@ let redirection = document.getElementById('confirm-command');
 let alert_notification = document.querySelector('.notification-container')
 stock.innerHTML = 50 ;
 
-addToCart();
+refreshCart();
 removeCartItem();
 clearCart();
 
@@ -25,7 +25,7 @@ coursesList.addEventListener('click', (e) => {
 
         addToLS(COURSES[dataId]);
 
-        addToCart();
+        refreshCart();
 
         notification("Vous avez ajouter un " + courseName + " dans le panier", '#198754', '#FFF')
 
@@ -36,10 +36,11 @@ function removeCartItem(){
     header.addEventListener('click', (e) =>{
         if (e.target.className == 'cart-item'){
             e.target.parentNode.parentNode.remove();
+            refreshCart();
 
             let index = e.target.parentNode.parentNode.querySelector(".index").innerHTML;
-            cart.innerHTML --;
-            Subtotal.innerHTML -= parseInt(9.99);
+            // cart.innerHTML --;
+            // Subtotal.innerHTML -= parseInt(9.99);
 
             removeFromLS(index);
 
@@ -81,7 +82,7 @@ function removeCartItem(){
 
 // }
 
-function addToCart(){
+function refreshCart(){
 
     let lsList = JSON.parse(localStorage.getItem("panier"));
 
@@ -117,8 +118,8 @@ function addToLS(data){
 
     if (a != null){
         a = JSON.parse(a);
-        cart.innerHTML ++;
-        Subtotal.innerHTML += parseInt(9.99);
+        // cart.innerHTML ++;
+        // Subtotal.innerHTML += parseInt(9.99);
     }  else {
         a = [];
     }
