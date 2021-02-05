@@ -48,38 +48,38 @@ function removeCartItem(){
 }
 
 //récupère le stock et l'affiche dans le HTML
-function getStock(){
+// function getStock(){
 
-    let lsList = JSON.parse(localStorage.getItem("panier"));
-    if (lsList == null){
-        return;
-    }
+//     let lsList = JSON.parse(localStorage.getItem("panier"));
+//     if (lsList == null){
+//         return;
+//     }
 
-    let AllStocks = document.querySelectorAll(".stock");
+//     let AllStocks = document.querySelectorAll(".stock");
 
-    let ux_ui = lsList.filter(function(item) {
-        return item.id == 1;
-    });
-    let php_8 = lsList.filter(function(item) {
-        return item.id == 2;
-    });
-    let react_js = lsList.filter(function(item) {
-        return item.id == 3;
-    });
-    let node_js = lsList.filter(function(item) {
-        return item.id == 4;
-    });
-    let my_sql = lsList.filter(function(item) {
-        return item.id == 5;
-    });
+//     let ux_ui = lsList.filter(function(item) {
+//         return item.id == 1;
+//     });
+//     let php_8 = lsList.filter(function(item) {
+//         return item.id == 2;
+//     });
+//     let react_js = lsList.filter(function(item) {
+//         return item.id == 3;
+//     });
+//     let node_js = lsList.filter(function(item) {
+//         return item.id == 4;
+//     });
+//     let my_sql = lsList.filter(function(item) {
+//         return item.id == 5;
+//     });
 
-    AllStocks[0].innerHTML = ux_ui[ux_ui.length-1].stock;
-    AllStocks[1].innerHTML = php_8[php_8.length-1].stock;
-    AllStocks[2].innerHTML = react_js[react_js.length-1].stock;
-    AllStocks[3].innerHTML = node_js[node_js.length-1].stock;
-    AllStocks[4].innerHTML = my_sql[my_sql.length-1].stock;
+//     AllStocks[0].innerHTML = ux_ui[ux_ui.length-1].stock;
+//     AllStocks[1].innerHTML = php_8[php_8.length-1].stock;
+//     AllStocks[2].innerHTML = react_js[react_js.length-1].stock;
+//     AllStocks[3].innerHTML = node_js[node_js.length-1].stock;
+//     AllStocks[4].innerHTML = my_sql[my_sql.length-1].stock;
 
-}
+// }
 
 function addToCart(){
 
@@ -124,13 +124,13 @@ function addToLS(data){
     }
 
 
-    if (data.stock > 1){
-        data.stock--;
-    }
-    else{
-        alert('Article Indisponible');
-        return;
-    }
+    // if (data.stock > 1){
+    //     data.stock--;
+    // }
+    // else{
+    //     alert('Article Indisponible');
+    //     return;
+    // }
 
     a.push(data);
     localStorage.setItem('panier', JSON.stringify(a));
@@ -141,16 +141,16 @@ function removeFromLS(data){
 
     let lsList = JSON.parse(localStorage.getItem("panier"));
 
-    let lastObjectId = lsList[data].id;
+//    let lastObjectId = lsList[data].id;
 
     //Enlever l'objet en question de l'array
     lsList = lsList.filter(item => item !== lsList[data]);
 
-    for (o in lsList){
-        if (lsList[o].id = lastObjectId){
-            lsList[o].stock++;
-        }
-    }
+    // for (o in lsList){
+    //     if (lsList[o].id = lastObjectId){
+    //         lsList[o].stock++;
+    //     }
+    // }
 
     localStorage.setItem('panier', JSON.stringify(lsList));
     notification('Vous avez supprimer un article', '#dc3545', '#FFF')
